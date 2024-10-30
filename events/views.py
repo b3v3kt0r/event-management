@@ -11,6 +11,7 @@ from events.serializers import (
     EventListSerializer,
     EventDetailSerializer
 )
+from events.utils import send_event_registration_email
 
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -68,6 +69,8 @@ class EventViewSet(viewsets.ModelViewSet):
 
         event.participants.add(user)
         event.save()
+
+        send_event_registration_email(user, event)
 
         return Response(
             {"detail": "You have joined the event successfully."},
