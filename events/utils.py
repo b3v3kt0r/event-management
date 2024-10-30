@@ -9,7 +9,7 @@ load_dotenv()
 def send_event_registration_email(user, event):
     subject = f"Registration for the {event.title} event is successful."
 
-    event_date_formatted = event.date.strftime("%d %B %Y о %H:%M")
+    event_date_formatted = event.date.strftime("%d %B %Y %H:%M")
 
     message = (
         f"Hello, {user.username}!\n\n"
