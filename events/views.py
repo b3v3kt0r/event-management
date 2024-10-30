@@ -50,7 +50,8 @@ class EventViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=["get"],
         url_path="leave",
-        url_name="leave_event")
+        url_name="leave_event",
+        permission_classes=[permissions.IsAuthenticated])
     def leave_event(self, request, pk=None):
         event = self.get_object()
         user = request.user
