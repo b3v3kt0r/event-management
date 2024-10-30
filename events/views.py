@@ -6,7 +6,11 @@ from rest_framework.response import Response
 
 from events.filters import EventFilter
 from events.models import Event
-from events.serializers import EventSerializer, EventListSerializer, EventDetailSerializer
+from events.serializers import (
+    EventSerializer,
+    EventListSerializer,
+    EventDetailSerializer
+)
 
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -57,13 +61,18 @@ class EventViewSet(viewsets.ModelViewSet):
         user = request.user
 
         if event.participants.filter(id=user.id).exists():
-            return Response({"detail": "You are already a participant of this event."},
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"detail": "You are already a participant of this event."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         event.participants.add(user)
         event.save()
 
-        return Response({"detail": "You have joined the event successfully."}, status=status.HTTP_200_OK)
+        return Response(
+            {"detail": "You have joined the event successfully."},
+            status=status.HTTP_200_OK
+        )
 
     @extend_schema(
         description="Leave an event as a participant.",
@@ -94,9 +103,15 @@ class EventViewSet(viewsets.ModelViewSet):
         user = request.user
 
         if not event.participants.filter(id=user.id).exists():
-            return Response({"detail": "You are not a participant of this event."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"detail": "You are not a participant of this event."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         event.participants.remove(user)
         event.save()
 
-        return Response({"detail": "You have left the event successfully."}, status=status.HTTP_200_OK)
+        return Response(
+            {"detail": "You have left the event successfully."},
+            status=status.HTTP_200_OK
+        )

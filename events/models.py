@@ -8,7 +8,11 @@ class Event(models.Model):
     date = models.DateTimeField()
     location = models.CharField(max_length=100)
     organizer = models.CharField(max_length=100)
-    participants = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name="events")
+    participants = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        related_name="events"
+    )
 
     def __str__(self):
         return self.title
