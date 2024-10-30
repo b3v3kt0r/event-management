@@ -29,7 +29,7 @@ class EventViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
-        methods=["get"],
+        methods=["post"],
         url_path="join",
         url_name="join_event",
         permission_classes=[permissions.IsAuthenticated])
@@ -48,7 +48,7 @@ class EventViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
-        methods=["get"],
+        methods=["delete"],
         url_path="leave",
         url_name="leave_event",
         permission_classes=[permissions.IsAuthenticated])
