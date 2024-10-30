@@ -1,5 +1,7 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 
+from events.filters import EventFilter
 from events.models import Event
 from events.serializers import EventSerializer, EventListSerializer, EventDetailSerializer
 
@@ -7,6 +9,8 @@ from events.serializers import EventSerializer, EventListSerializer, EventDetail
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = EventFilter
 
     def get_serializer_class(self):
         if self.action == "list":
