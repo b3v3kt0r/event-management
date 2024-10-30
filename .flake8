@@ -9,3 +9,4 @@ exclude =
     venv
     tests
     events\tests.py
+    event_management\settings.py
